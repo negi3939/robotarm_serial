@@ -1,7 +1,7 @@
 ifdef target
 	TARGET=$(target)
 else
-	TARGET=serial
+	TARGET=negi
 endif
 
 ifeq ($(TARGET),key)
@@ -13,6 +13,18 @@ ifeq ($(TARGET),serial)
 	SOURCE_MAIN = serial.cpp
 	SOURCE_SUB = keyboard.cpp
 	CXXFLAGS = -DSERIAL_IS_MAIN
+endif
+
+ifeq ($(TARGET),negi)
+        SOURCE_MAIN = Negi39IKID.cpp
+        SOURCE_SUB = mymath.cpp solvenu.cpp inversekinematics.cpp inversedynamics.cpp
+        CXXFLAGS += -DNEGI_IS_MAIN
+endif
+
+ifeq ($(TARGET),robot)
+	SOURCE_MAIN = serial_robot.cpp
+	SOURCE_SUB = serial.cpp keyboard.cpp
+	CXXFLAGS = -DROBOT_IS_MAIN
 endif
 
 
