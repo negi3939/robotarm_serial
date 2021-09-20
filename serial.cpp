@@ -313,13 +313,13 @@ int main(int argc,char *argv[]){
     while(1){
         gettimeofday(&end_time, NULL);
         time_second = (double)(end_time.tv_sec - start_time.tv_sec)+(double)(end_time.tv_usec - start_time.tv_usec)*0.000001;
-        data[0] = (int)(120.0*sin(omega*time_second));
-        data[1] = (int)(120.0*cos(omega*time_second));
-        data[2] = (int)(120.0*sin(0.5*omega*time_second));
-        data[3] = (int)(120.0*cos(0.5*omega*time_second));
-        data[4] = (int)(120.0*sin(1.5*omega*time_second));
-        data[5] = (int)(120.0*cos(1.5*omega*time_second));
-        data[6] = (int)(120.0*sin(2.0*omega*time_second));
+        data[0] = 0;
+        data[1] = -10;
+        data[2] = -10;
+        data[3] = 90;
+        data[4] = 30;
+        data[5] = 90;
+        data[6] = 70;
         for(int ii=0;ii<(sizeof(data)/sizeof(int));ii++){
             send8t[2*ii+1] = ((uint16_t)data[ii] >> 8 ) & 0xFF; 
             send8t[2*ii+2] = (uint16_t)data[ii] & 0xFF;

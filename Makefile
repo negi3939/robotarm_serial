@@ -1,7 +1,7 @@
 ifdef target
 	TARGET=$(target)
 else
-	TARGET=negi
+	TARGET=serial
 endif
 
 ifeq ($(TARGET),key)
