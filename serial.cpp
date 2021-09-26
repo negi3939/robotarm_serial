@@ -314,10 +314,10 @@ int main(int argc,char *argv[]){
         gettimeofday(&end_time, NULL);
         time_second = (double)(end_time.tv_sec - start_time.tv_sec)+(double)(end_time.tv_usec - start_time.tv_usec)*0.000001;
         data[0] = 0;
-        data[1] = -10;
-        data[2] = -10;
+        data[1] = -30;
+        data[2] = -30;
         data[3] = 90;
-        data[4] = 30;
+        data[4] = -30;
         data[5] = 90;
         data[6] = 70;
         for(int ii=0;ii<(sizeof(data)/sizeof(int));ii++){

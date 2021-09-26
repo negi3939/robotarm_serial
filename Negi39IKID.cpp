@@ -343,30 +343,24 @@ VectorXd Negi39IKID::setangle(VectorXd ang){
 #if defined(NEGI_IS_MAIN)
 int main(){
     int jointnum = 6;
-    std::vector<DHparameter> kardh(jointnum);
-    double attachdis = 0.102d;
-    kardh[0].set(                           0.0d*M_PI,                                   0.055d,                0.21d,  -0.5d*M_PI); 
-    kardh[1].set(-0.5d*M_PI+std::atan2(0.080d,0.420d), std::sqrt(0.420d*0.420d + 0.080d*0.080d),                 0.0d,   0.0d*M_PI);
-    kardh[2].set( 0.5d*M_PI-std::atan2(0.080d,0.420d),                                     0.0d,                 0.0d,   0.5d*M_PI);
-    kardh[3].set(                           0.0d*M_PI,                                     0.0d,               0.390d,  -0.5d*M_PI);
-    kardh[4].set(                           0.0d*M_PI,                                     0.0d,                 0.0d,   0.5d*M_PI);
-    kardh[5].set(                           0.0d*M_PI,                                     0.0d,   0.045d + attachdis,   0.0d*M_PI);
-    VectorXd uplimit(6);
-    VectorXd lowlimit(6);
-    uplimit <<    120.0d/180.0d*M_PI ,  70.0d/180.0d*M_PI  , 170.0d/180.0d*M_PI  ,  110.0d/180.0d*M_PI ,   75.0d/180.0d*M_PI ,    120.0d/180.0d*M_PI;//可動上限範囲を設定(1~6軸)
-    lowlimit <<  -120.0d/180.0d*M_PI , -35.0d/180.0d*M_PI  ,  -0.0d/180.0d*M_PI  , -110.0d/180.0d*M_PI ,  -90.0d/180.0d*M_PI ,   -120.0d/180.0d*M_PI;//可動下限範囲を設定(1~6軸)
+    std::vector<DHparameter> mytobot(jointnum);
+    mytobot[0].set( 0.0d*M_PI,     0.0d, 0.0965d, -0.5d*M_PI); 
+    mytobot[1].set( -0.5d*M_PI, 0.1075d,    0.0d,  0.0d*M_PI);
+    mytobot[2].set( 0.0d*M_PI,     0.0d,    0.0d,  0.5d*M_PI);
+    mytobot[3].set( 0.0d*M_PI, 0.134d, 0.0d,  -0.5d*M_PI);
+    mytobot[4].set( 0.5d*M_PI,   0.0d, -0.015d, 0.5d*M_PI);
+    mytobot[5].set( 0.5d*M_PI, 0.015d, 0.205d, 0.0d*M_PI);
     
-    Negi39IKID *ksik = new Negi39IKID(kardh,uplimit,lowlimit);
+    Negi39IKID *roboik = new Negi39IKID(mytobot);
     VectorXd ang(jointnum);
     VectorXd angle_deg_defo(6);
-    angle_deg_defo << -18.6979 , 5.02352 , 98.8579 , -0.251937 , 75.2884 , 20.6719;
-    ksik->setdefoko(angle_deg_defo,DEG);
-
+    angle_deg_defo << 0.0d , -30.0d , -30.0d , -90.0d , -30.0d , 0.0d;
+    roboik->setdefoko(angle_deg_defo,DEG);
     Vector3d pos;
-    pos << -0.05,0.0,-0.0; 
-    double eul = -60.0d*M_PI/180.0d;
-    ksik->solve_relative(pos,YAW,eul);
-    ksik->show_angle();
-    delete ksik;
+    pos << -0.0,0.0,-0.0; 
+    double eul = -0.0d*M_PI/180.0d;
+    roboik->solve_relative(pos,YAW,eul);
+    roboik->show_angle();
+    delete roboik;
 }
 #endif

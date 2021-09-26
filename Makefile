@@ -1,7 +1,7 @@
 ifdef target
 	TARGET=$(target)
 else
-	TARGET=serial
+	TARGET=robot
 endif
 
 ifeq ($(TARGET),key)
@@ -23,14 +23,14 @@ endif
 
 ifeq ($(TARGET),robot)
 	SOURCE_MAIN = serial_robot.cpp
-	SOURCE_SUB = serial.cpp keyboard.cpp
+	SOURCE_SUB = serial.cpp keyboard.cpp mymath.cpp solvenu.cpp inversekinematics.cpp inversedynamics.cpp Negi39IKID.cpp
 	CXXFLAGS = -DROBOT_IS_MAIN
 endif
 
 
 PROGRAM = $(SOURCE_MAIN:%.cpp=%.exe)
 SUBOBJ = $(SOURCE_SUB:%.cpp=%.o)
-
+PROGRAM += $(SUBOBJ)
 DIRX = /usr/X11R6/lib
 
 CXXFLAGS += -fpermissive
